@@ -12,6 +12,7 @@ public class JSliderFrame extends JPanel {
         g.setColor(Color.red);
         // Draw circle
         g.fillOval(10, 10, diameter, diameter);
+        System.out.println("By Abhishek KC");
     }
     // Set diameter from slider
     public void setDiameter(int newDiameter) {

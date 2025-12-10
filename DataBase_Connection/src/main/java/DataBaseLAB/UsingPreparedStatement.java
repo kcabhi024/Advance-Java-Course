@@ -1,13 +1,7 @@
-package DisplayAuthors;
+package DataBaseLAB;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-
-public class InsertInTable {
+public class UsingPreparedStatement {
     static final String DATABASE_URL = "jdbc:mysql://localhost/books";
 
     // launch the application
@@ -21,12 +15,23 @@ public class InsertInTable {
 // establish connection to database
             connection = DriverManager.getConnection(
                     DATABASE_URL, "root", "admin");
-// create Statement for querying database
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-// query database
+            connection.setAutoCommit(false);
+
+// create Statement for querying database
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO authors VALUES(?,?,?)");
+
+            pstmt.setInt(1,20);
+            pstmt.setString(2,"abhi");
+            pstmt.setString(3,"dada");
+            pstmt.addBatch();
+
+            int[] updateCounts = pstmt.executeBatch();
+            connection.commit();
+
+
             resultSet = statement.executeQuery(
                     "SELECT author_id, first_name, last_name FROM authors");
-// process query results
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             System.out.println("Authors Table of Books Database:\n");
@@ -34,23 +39,20 @@ public class InsertInTable {
                 System.out.printf("%-8s\t", metaData.getColumnName(i));
             System.out.println();
 
-            // insert
-            resultSet.moveToInsertRow();
-            resultSet.updateInt("author_id", 7);
-            resultSet.updateString("first_name" , "rabin");
-            resultSet.updateString("last_name" , "Pyaku");
-            resultSet.insertRow();
-
-
+            resultSet.beforeFirst();
             while (resultSet.next()) {
                 for (int i = 1; i <= numberOfColumns; i++)
                     System.out.printf("%-8s\t", resultSet.getObject(i));
                 System.out.println();
-            } // end while
+            }
         } // end try
-        catch (SQLException sqlException) {
+        catch (BatchUpdateException sqlException) {
             sqlException.printStackTrace();
-        } // end catch
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        // end catch
         finally // ensure resultSet, statement and connection are closed
         {
             try {
@@ -63,4 +65,7 @@ public class InsertInTable {
             } // end catch
         } // end finally
     } //
+
+
+
 }
