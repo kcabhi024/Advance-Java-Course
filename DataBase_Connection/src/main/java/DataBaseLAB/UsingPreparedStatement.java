@@ -1,10 +1,10 @@
 package DataBaseLAB;
+
+    // launch the application
 import java.sql.*;
 
 public class UsingPreparedStatement {
     static final String DATABASE_URL = "jdbc:mysql://localhost/books";
-
-    // launch the application
     public static void main(String args[]) {
         Connection connection = null; // manages connection
 
