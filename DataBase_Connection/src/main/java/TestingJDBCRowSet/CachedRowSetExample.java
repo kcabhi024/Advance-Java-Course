@@ -26,8 +26,20 @@ public class CachedRowSetExample {
 
             // 2️⃣ Update data (offline)
             rowSet.absolute(4);
-            rowSet.updateString("first_name", "Abhi");
+            rowSet.updateString("first_name", "kc");
             rowSet.updateRow();
+
+            // insert
+//            rowSet.moveToInsertRow();
+//            rowSet.updateInt("author_id", 11);
+//            rowSet.updateString("first_name", "Saugat");
+//            rowSet.updateString("last_name", "Uprety");
+//            rowSet.insertRow();
+//            rowSet.moveToCurrentRow();
+
+            //delete
+            rowSet.absolute(5);
+            rowSet.deleteRow();
 
             // 3️⃣ MANUAL connection with autoCommit OFF
             try (Connection con = DriverManager.getConnection(
