@@ -19,13 +19,27 @@ public class UsingPreparedStatement {
             connection.setAutoCommit(false);
 
 // create Statement for querying database
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO authors VALUES(?,?,?)");
+//            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO authors VALUES(?,?,?)");
+//
+//            pstmt.setInt(1,1);
+//            pstmt.setString(2,"abhi");
+//            pstmt.setString(3,"dada");
+//            pstmt.addBatch();
 
-            pstmt.setInt(1,20);
-            pstmt.setString(2,"abhi");
-            pstmt.setString(3,"dada");
+
+            // Update
+//            PreparedStatement pstmt = connection.prepareStatement("UPDATE authors SET last_name = ? WHERE author_id = ?");
+//            pstmt.setString(1, "KC");
+//            pstmt.setInt(2, 1);
+//            pstmt.addBatch();
+
+            //Delete
+            PreparedStatement pstmt = connection.prepareStatement("DELETE FROM authors WHERE author_id = ?");
+            pstmt.setInt(1, 1);
             pstmt.addBatch();
 
+
+            //
             int[] updateCounts = pstmt.executeBatch();
             connection.commit();
 
@@ -35,6 +49,7 @@ public class UsingPreparedStatement {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             System.out.println("Authors Table of Books Database:\n");
+            System.out.println("Delete Data");
             for (int i = 1; i <= numberOfColumns; i++)
                 System.out.printf("%-8s\t", metaData.getColumnName(i));
             System.out.println();

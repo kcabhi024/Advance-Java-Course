@@ -22,24 +22,24 @@ public class ExecuteUsingBatch {
 // create Statement for querying database
             statement = connection.createStatement();
 // query database
-//            statement.addBatch("INSERT INTO authors VALUES('20','khemu','raut')");
+//            statement.addBatch("INSERT INTO authors VALUES('1','Abhi','KC')");
 //            statement.addBatch("INSERT INTO authors VALUES('21','Abhishek','kc')");
 //            statement.addBatch("INSERT INTO authors VALUES('22','Bodh','xettri')");
 
 
 
             // update
-//            statement.addBatch("UPDATE authors SET last_name='KC' WHERE author_id='22'");
+//            statement.addBatch("UPDATE authors SET last_name='Kesy' WHERE author_id='1'");
 
             // delete
-            statement.addBatch("DELETE FROM authors WHERE author_id='1'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='2'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='3'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='10'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='15'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='20'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='21'");
-            statement.addBatch("DELETE FROM authors WHERE author_id='22'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='1'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='2'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='3'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='10'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='15'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='20'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='21'");
+//            statement.addBatch("DELETE FROM authors WHERE author_id='22'");
 
 
 
@@ -58,6 +58,7 @@ public class ExecuteUsingBatch {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             System.out.println("Authors Table of Books Database:\n");
+            System.out.println("Update Data");
             for (int i = 1; i <= numberOfColumns; i++)
                 System.out.printf("%-8s\t", metaData.getColumnName(i));
             System.out.println();
